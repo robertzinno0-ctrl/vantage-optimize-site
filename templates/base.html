@@ -184,9 +184,13 @@
         }
 
         /* ── PACKAGE CARDS ── */
+        @media (max-width: 768px) {
+            .packages-grid { grid-template-columns: 1fr !important; }
+            .package-card { margin-bottom: 16px; }
+        }
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
