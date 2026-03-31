@@ -1,0 +1,484 @@
+{% extends "base.html" %}
+
+{% block title %}Men's Programs — VANTAGE Optimize{% endblock %}
+
+{% block extra_head %}
+<style>
+    .page-hero {
+        background: linear-gradient(135deg, #0a0a0f 0%, #0d1a2b 50%, #0a0a0f 100%);
+        border-bottom: 1px solid var(--border);
+        padding: 5rem 2rem 4rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(14, 165, 233, 0.1) 0%, transparent 60%);
+    }
+
+    .page-hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+
+    .page-hero-badge {
+        display: inline-block;
+        background: rgba(14, 165, 233, 0.1);
+        border: 1px solid rgba(14, 165, 233, 0.25);
+        color: var(--blue-bright);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+        color: var(--text);
+    }
+
+    .page-hero h1 span { color: var(--blue-bright); }
+
+    .page-hero p {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .protocol-category { margin-bottom: 4rem; }
+
+    .protocol-category-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .protocol-category-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+
+    .category-tag {
+        background: var(--blue-glow);
+        border: 1px solid rgba(14, 165, 233, 0.25);
+        color: var(--blue-bright);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .package-savings {
+        font-size: 0.75rem;
+        color: #22c55e;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .compare-table {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        margin-top: 4rem;
+    }
+
+    .compare-table-header {
+        background: var(--bg2);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .compare-table-header h3 { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+
+    .compare-table table { width: 100%; border-collapse: collapse; }
+
+    .compare-table th {
+        padding: 1rem 1.5rem;
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        background: var(--bg3);
+    }
+
+    .compare-table td {
+        padding: 1rem 1.5rem;
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: rgba(14, 165, 233, 0.03); }
+
+    .compare-table .price-cell {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        color: var(--blue-bright);
+        font-size: 1rem;
+    }
+
+    .compare-table .best-value { background: rgba(245, 158, 11, 0.05); }
+    .compare-table .best-value td { color: var(--text); }
+
+    /* IHN Microdose note box */
+    .info-box {
+        background: rgba(14, 165, 233, 0.06);
+        border: 1px solid rgba(14, 165, 233, 0.2);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-top: 1rem;
+    }
+
+    .info-box strong { color: var(--blue-bright); }
+
+    @media (max-width: 768px) {
+        .compare-table { overflow-x: auto; display: block; }
+        .compare-table table { min-width: 600px; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="page-hero-content">
+        <div class="page-hero-badge">⚡ Men's Optimization Programs</div>
+        <h1>Designed for Men Who Want <span>Real Results.</span></h1>
+        <p>Metabolic reset, weight loss, body optimization, cognitive performance — all provider-supervised and coach-guided. Your transformation, your way.</p>
+    </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div style="background:rgba(14,165,233,0.05);border-bottom:1px solid rgba(14,165,233,0.15);padding:0.9rem 2rem;text-align:center;">
+    <p style="font-size:0.78rem;color:var(--text-muted);max-width:800px;margin:0 auto;">
+        <strong style="color:var(--blue-bright);">Educational information only.</strong> Individual care decisions are determined by a qualified healthcare provider. Coaches educate, support, and guide — they do not prescribe, diagnose, or recommend specific dosing. This is not medical advice.
+    </p>
+</div>
+
+<!-- PROGRAMS -->
+<div class="section">
+
+    <!-- 12-WEEK METABOLIC RESET -->
+    <div class="protocol-category">
+        <div class="protocol-category-header">
+            <h2>12-Week Metabolic Reset</h2>
+            <span class="category-tag">GLP Therapy Support</span>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;max-width:700px;">
+            <strong>Goal:</strong> Lose 10–25 lbs, improve metabolic health, and restore energy — through a structured 12-week program combining provider-prescribed GLP therapy support with dedicated coaching.
+        </p>
+
+        <div class="packages-grid">
+
+            <!-- Basic -->
+            <div class="package-card">
+                <div class="package-icon">🔥</div>
+                <div class="package-name">Metabolic Reset — Basic</div>
+                <div class="package-tagline">Foundations of metabolic transformation with provider-prescribed support.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$497<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support (Semaglutide, Tirzepatide, or Retatrutide — as clinically determined)</li>
+                    <li>Metabolic baseline labs &amp; provider intake</li>
+                    <li>Weekly accountability check-ins</li>
+                    <li>Nutrition &amp; macro coaching</li>
+                    <li>Supplement support guidance</li>
+                    <li>Muscle preservation strategy</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+            <!-- Advanced -->
+            <div class="package-card featured">
+                <div class="package-badge">⭐ Most Popular</div>
+                <div class="package-icon">🚀</div>
+                <div class="package-name">Metabolic Reset — Advanced</div>
+                <div class="package-tagline">Enhanced support, deeper coaching, and accelerated results.</div>
+                <div class="provider-rx-badge" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08);color:var(--gold-bright);">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$797<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support (Semaglutide, Tirzepatide, or Retatrutide — as clinically determined)</li>
+                    <li>Comprehensive metabolic labs + provider review</li>
+                    <li>Bi-weekly coaching sessions</li>
+                    <li>Advanced nutrition strategy &amp; meal planning</li>
+                    <li>Supplement stack optimization</li>
+                    <li>Body composition tracking</li>
+                    <li>Priority coach messaging</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold">Get Started →</a>
+            </div>
+
+            <!-- VIP -->
+            <div class="package-card">
+                <div class="package-icon">👑</div>
+                <div class="package-name">Metabolic Reset — VIP</div>
+                <div class="package-tagline">The complete transformation experience with concierge-level coaching.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$1,297<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support (Semaglutide, Tirzepatide, or Retatrutide — as clinically determined)</li>
+                    <li>Full metabolic, hormone &amp; biomarker panel</li>
+                    <li>Weekly 1-on-1 coaching sessions</li>
+                    <li>Personalized nutrition + training blueprint</li>
+                    <li>Advanced supplement protocol</li>
+                    <li>Dedicated coach (unlimited messaging)</li>
+                    <li>Mid-program &amp; end-of-program labs</li>
+                    <li>Priority provider access</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+        </div>
+
+        <div class="info-box">
+            <strong>About GLP Therapy:</strong> Providers may use GLP agents such as Semaglutide, Tirzepatide, or Retatrutide to support metabolic health and weight management. Providers may also use smaller-than-standard doses ("microdosing") to support metabolic signaling with fewer side effects — this strategy is always determined by the prescribing provider based on your individual needs.
+        </div>
+    </div>
+
+    <!-- WEIGHT LOSS ACCELERATOR -->
+    <div class="protocol-category">
+        <div class="protocol-category-header">
+            <h2>Weight Loss Accelerator</h2>
+            <span class="category-tag">Fat Loss + Habits</span>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;max-width:700px;">
+            <strong>Goal:</strong> Accelerated fat loss paired with sustainable lifestyle habits that keep the results long-term. 12-week structure with weekly check-ins and provider-prescribed GLP therapy support.
+        </p>
+
+        <div class="packages-grid">
+
+            <div class="package-card">
+                <div class="package-icon">⚡</div>
+                <div class="package-name">Weight Loss Accelerator — Basic</div>
+                <div class="package-tagline">Proven fat-loss foundation with provider-prescribed therapy.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$497<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support</li>
+                    <li>Nutrition coaching &amp; protein-first strategy</li>
+                    <li>Weekly check-ins &amp; accountability</li>
+                    <li>Metabolic baseline assessment</li>
+                    <li>Habit formation framework</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+            <div class="package-card featured">
+                <div class="package-badge">⭐ Best Value</div>
+                <div class="package-icon">🏆</div>
+                <div class="package-name">Weight Loss Accelerator — Advanced</div>
+                <div class="package-tagline">Deeper coaching, body composition focus, and sustainable results.</div>
+                <div class="provider-rx-badge" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08);color:var(--gold-bright);">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$797<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support</li>
+                    <li>Advanced nutrition coaching + macro tracking</li>
+                    <li>Bi-weekly coaching sessions</li>
+                    <li>Body composition analysis</li>
+                    <li>Muscle preservation focus</li>
+                    <li>Supplement guidance</li>
+                    <li>Habit &amp; mindset coaching</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold">Get Started →</a>
+            </div>
+
+            <div class="package-card">
+                <div class="package-icon">💎</div>
+                <div class="package-name">Weight Loss Accelerator — VIP</div>
+                <div class="package-tagline">White-glove fat loss support with concierge coaching.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$1,297<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">12-week program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed GLP therapy support</li>
+                    <li>Weekly 1-on-1 coaching sessions</li>
+                    <li>Personalized nutrition + lifestyle blueprint</li>
+                    <li>Comprehensive labs (start &amp; end)</li>
+                    <li>Unlimited coach access (messaging)</li>
+                    <li>Training guidance &amp; movement planning</li>
+                    <li>Long-term maintenance strategy</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 90-DAY BODY OPTIMIZATION -->
+    <div class="protocol-category">
+        <div class="protocol-category-header">
+            <h2>90-Day Body Optimization</h2>
+            <span class="category-tag">Premium Program</span>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:2rem;max-width:700px;">
+            <strong>Goal:</strong> Transform body composition, elevate energy, and optimize recovery — all in 90 days. Full coaching, provider-prescribed peptide therapy, and a complete lifestyle overhaul.
+        </p>
+
+        <div class="packages-grid">
+
+            <div class="package-card">
+                <div class="package-icon">🏋️</div>
+                <div class="package-name">90-Day Body Optimization — Standard</div>
+                <div class="package-tagline">90 days of focused body transformation with peptide therapy support.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$1,497<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">90-day program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed peptide therapy (compounds clinically selected for body composition &amp; recovery)</li>
+                    <li>Full metabolic &amp; body composition assessment</li>
+                    <li>Nutrition strategy &amp; coaching</li>
+                    <li>Strength training guidance</li>
+                    <li>Weekly accountability coaching</li>
+                    <li>Recovery optimization protocol</li>
+                    <li>Progress tracking &amp; labs</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+            <div class="package-card featured">
+                <div class="package-badge">👑 Premium</div>
+                <div class="package-icon">⚡</div>
+                <div class="package-name">90-Day Body Optimization — Premium</div>
+                <div class="package-tagline">The ultimate transformation program. Every system, dialed in.</div>
+                <div class="provider-rx-badge" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08);color:var(--gold-bright);">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$1,997<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">90-day premium program</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed peptide therapy (full stack, clinically selected)</li>
+                    <li>Comprehensive labs — start, mid &amp; end</li>
+                    <li>Personalized nutrition + strength training plan</li>
+                    <li>Weekly 1-on-1 coaching sessions</li>
+                    <li>Unlimited coach messaging</li>
+                    <li>Recovery &amp; sleep optimization</li>
+                    <li>Priority provider consultations</li>
+                    <li>90-day transformation roadmap</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold">Get Started →</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="compare-table">
+        <div class="compare-table-header">
+            <h3>Men's Program Comparison</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Program</th>
+                    <th>Duration</th>
+                    <th>Best For</th>
+                    <th>Coaching</th>
+                    <th>Investment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Metabolic Reset — Basic</strong></td>
+                    <td>12 weeks</td>
+                    <td>Weight loss, metabolic health</td>
+                    <td>Weekly check-ins</td>
+                    <td class="price-cell">$497/mo</td>
+                </tr>
+                <tr class="best-value">
+                    <td><strong>Metabolic Reset — Advanced ⭐</strong></td>
+                    <td>12 weeks</td>
+                    <td>Enhanced results + coaching</td>
+                    <td>Bi-weekly sessions</td>
+                    <td class="price-cell" style="color:var(--gold-bright);">$797/mo</td>
+                </tr>
+                <tr>
+                    <td><strong>Metabolic Reset — VIP</strong></td>
+                    <td>12 weeks</td>
+                    <td>Concierge transformation</td>
+                    <td>Weekly 1-on-1 + unlimited</td>
+                    <td class="price-cell">$1,297/mo</td>
+                </tr>
+                <tr>
+                    <td><strong>Weight Loss Accelerator — Basic</strong></td>
+                    <td>12 weeks</td>
+                    <td>Fat loss + habits</td>
+                    <td>Weekly check-ins</td>
+                    <td class="price-cell">$497/mo</td>
+                </tr>
+                <tr>
+                    <td><strong>Weight Loss Accelerator — VIP</strong></td>
+                    <td>12 weeks</td>
+                    <td>Comprehensive fat loss</td>
+                    <td>Weekly 1-on-1 + unlimited</td>
+                    <td class="price-cell">$1,297/mo</td>
+                </tr>
+                <tr>
+                    <td><strong>90-Day Body Optimization</strong></td>
+                    <td>90 days</td>
+                    <td>Body composition + energy</td>
+                    <td>Weekly coaching</td>
+                    <td class="price-cell">$1,497/mo</td>
+                </tr>
+                <tr class="best-value">
+                    <td><strong>90-Day Body Optimization — Premium 👑</strong></td>
+                    <td>90 days</td>
+                    <td>Complete transformation</td>
+                    <td>Weekly 1-on-1 + unlimited</td>
+                    <td class="price-cell" style="color:var(--gold-bright);">$1,997/mo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- BOTTOM CTA -->
+    <div style="text-align:center; margin-top:4rem; padding: 3rem; background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);">
+        <h3 style="font-size:1.8rem;font-weight:700;margin-bottom:0.75rem;">Not Sure Which Program?</h3>
+        <p style="color:var(--text-muted);margin-bottom:1.75rem;max-width:480px;margin-left:auto;margin-right:auto;">
+            Book a free consultation. We'll review your goals, current health, and point you to the right starting point.
+        </p>
+        <a href="/contact" class="btn btn-primary" style="width:auto;display:inline-flex;font-size:1rem;padding:0.9rem 2.2rem;">
+            Book Free Consult →
+        </a>
+        <p style="color:var(--text-dim);font-size:0.72rem;margin-top:1.25rem;max-width:560px;margin-left:auto;margin-right:auto;">
+            Educational information only. Individual care decisions are determined by a qualified healthcare provider. This is not medical advice.
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

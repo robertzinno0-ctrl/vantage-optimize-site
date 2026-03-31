@@ -1,0 +1,694 @@
+{% extends "base.html" %}
+
+{% block title %}VANTAGE — Peptide & Hormone Optimization Coaching{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* ── HERO ── */
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background: var(--bg);
+        padding: 2rem;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 40% at 80% 80%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+            radial-gradient(ellipse 40% 50% at 10% 60%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+        animation: heroPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroPulse {
+        0%   { opacity: 0.7; transform: scale(1); }
+        100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    .hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(14, 165, 233, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(14, 165, 233, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(60px); }
+    }
+
+    .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        animation: float 12s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    .orb-1 { width: 400px; height: 400px; background: rgba(14, 165, 233, 0.08); top: -10%; left: -10%; animation-delay: 0s; }
+    .orb-2 { width: 300px; height: 300px; background: rgba(245, 158, 11, 0.06); bottom: 0; right: 5%; animation-delay: -4s; }
+    .orb-3 { width: 200px; height: 200px; background: rgba(14, 165, 233, 0.06); bottom: 20%; left: 20%; animation-delay: -8s; }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) scale(1); }
+        33%       { transform: translateY(-30px) scale(1.05); }
+        66%       { transform: translateY(20px) scale(0.97); }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 860px;
+    }
+
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(14, 165, 233, 0.1);
+        border: 1px solid rgba(14, 165, 233, 0.25);
+        color: var(--blue-bright);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        animation: fadeInUp 0.6s ease both;
+    }
+
+    .hero-eyebrow::before {
+        content: '';
+        width: 6px; height: 6px;
+        background: var(--blue);
+        border-radius: 50%;
+        animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.3; }
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s 0.1s ease both;
+    }
+
+    .hero-title .accent {
+        background: linear-gradient(135deg, var(--blue-bright), var(--blue), #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: var(--text-muted);
+        max-width: 580px;
+        margin: 0 auto 2.5rem;
+        font-weight: 400;
+        line-height: 1.7;
+        animation: fadeInUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.6s 0.3s ease both;
+    }
+
+    .hero-actions .btn {
+        width: auto;
+        padding: 0.9rem 2.2rem;
+        font-size: 1rem;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        animation: fadeInUp 0.6s 0.4s ease both;
+    }
+
+    .hero-stat { text-align: center; }
+
+    .hero-stat-num {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .hero-stat-num span { color: var(--blue); }
+
+    .hero-stat-label {
+        font-size: 0.78rem;
+        color: var(--text-dim);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-top: 0.3rem;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+
+    .step { text-align: center; padding: 1.5rem; }
+
+    .step-num {
+        width: 56px; height: 56px;
+        background: var(--blue-glow);
+        border: 1.5px solid rgba(14, 165, 233, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.25rem;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--blue-bright);
+    }
+
+    .step h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+    .step-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--blue);
+        font-size: 1.3rem;
+        padding-top: 2rem;
+    }
+
+    @media (max-width: 768px) { .step-arrow { display: none; } }
+
+    /* ── WHY US ── */
+    .why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .why-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.75rem;
+        transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .why-card:hover { border-color: rgba(14, 165, 233, 0.4); transform: translateY(-3px); }
+    .why-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .testimonial {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        position: relative;
+    }
+
+    .testimonial::before {
+        content: '"';
+        position: absolute;
+        top: 1rem; right: 1.5rem;
+        font-size: 5rem;
+        line-height: 1;
+        color: rgba(14, 165, 233, 0.1);
+        font-family: Georgia, serif;
+    }
+
+    .testimonial-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+
+    .testimonial-avatar {
+        width: 44px; height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue), #818cf8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    .testimonial-name { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .testimonial-meta { font-size: 0.78rem; color: var(--text-dim); }
+    .testimonial-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.25rem; }
+
+    /* ── GENDER CTA CARDS ── */
+    .gender-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    .gender-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 2rem;
+        text-align: center;
+        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+    }
+
+    .gender-card:hover { transform: translateY(-4px); color: var(--text); }
+    .gender-card.mens:hover { border-color: var(--blue); box-shadow: 0 20px 60px rgba(14, 165, 233, 0.12); }
+    .gender-card.womens:hover { border-color: #e879f9; box-shadow: 0 20px 60px rgba(232, 121, 249, 0.12); }
+
+    .gender-emoji { font-size: 3rem; margin-bottom: 1rem; }
+    .gender-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .gender-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .gender-card .btn { width: auto; }
+
+    /* ── PROGRAMS SECTION ── */
+    .program-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .program-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--blue);
+        box-shadow: 0 20px 60px rgba(14, 165, 233, 0.1);
+    }
+
+    .program-card.popular {
+        border-color: var(--gold);
+        background: linear-gradient(135deg, #12121c, #1a1508);
+    }
+
+    .program-card.popular:hover {
+        border-color: var(--gold-bright);
+        box-shadow: 0 20px 60px rgba(245, 158, 11, 0.15);
+    }
+
+    @media (max-width: 600px) {
+        .gender-ctas { grid-template-columns: 1fr; }
+        .hero-stats { gap: 1.5rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow">Coach-Guided · Provider-Prescribed · Evidence-Informed</div>
+        <h1 class="hero-title">
+            Transform Your Body.<br>
+            <span class="accent">Reclaim Your Life.</span>
+        </h1>
+        <p class="hero-subtitle">
+            Outcome-focused coaching paired with provider-prescribed protocols.
+            Personalized support at every step — from labs to lasting results.
+        </p>
+        <div class="hero-actions">
+            <a href="/contact" class="btn btn-primary">Start Your Transformation →</a>
+            <a href="#programs" class="btn btn-outline">View Programs</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num">2,400<span>+</span></div>
+                <div class="hero-stat-label">Lives Transformed</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">13<span>+</span></div>
+                <div class="hero-stat-label">Programs</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">98<span>%</span></div>
+                <div class="hero-stat-label">Satisfaction Rate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">The Process</div>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Five clear steps from conversation to transformation.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h3>Book Consultation</h3>
+                <p>Free 15-minute call with a Vantage advisor to understand your goals and where you are today.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h3>Labs + Intake</h3>
+                <p>Comprehensive labs and health intake. We need your numbers before any protocol is designed.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h3>Provider Creates Protocol</h3>
+                <p>A licensed IHN provider reviews your labs and creates a personalized prescription protocol.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <h3>Coach Guides Your Journey</h3>
+                <p>Your dedicated coach supports nutrition, lifestyle, adherence, and accountability every step of the way.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">05</div>
+                <h3>Results + Adjustment</h3>
+                <p>Follow-up labs, progress reviews, and protocol refinements to keep your momentum building.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMS OVERVIEW -->
+<section id="programs">
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Our Programs</div>
+            <h2 class="section-title">Built for Your Goals</h2>
+            <p class="section-subtitle">Choose your transformation path. Every program is provider-supervised and coach-guided.</p>
+        </div>
+        <div class="gender-ctas">
+            <a href="/mens" class="gender-card mens">
+                <div class="gender-emoji">⚡</div>
+                <div class="gender-title">Men's Programs</div>
+                <div class="gender-desc">Metabolic reset, weight loss, body optimization, performance, and cognitive edge.</div>
+                <span class="btn btn-primary" style="width:auto;display:inline-flex;">Explore Men's →</span>
+            </a>
+            <a href="/womens" class="gender-card womens">
+                <div class="gender-emoji">✨</div>
+                <div class="gender-title">Women's Programs</div>
+                <div class="gender-desc">Weight loss, hormone balance, 50+ optimization, anti-aging, and vitality protocols.</div>
+                <span class="btn btn-outline" style="width:auto;display:inline-flex;border-color:#e879f9;color:#e879f9;">Explore Women's →</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- UNIVERSAL PROGRAMS (Peptide Stacks) -->
+<section style="background:var(--bg2); border-top:1px solid var(--border);">
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Specialty Programs</div>
+            <h2 class="section-title">Cognitive, Recovery &amp; Longevity</h2>
+            <p class="section-subtitle">Targeted programs for brain performance, cellular repair, and lifespan optimization — for men and women.</p>
+        </div>
+        <div class="packages-grid">
+
+            <!-- Cognitive Edge -->
+            <div class="package-card">
+                <div class="package-icon">🧠</div>
+                <div class="package-name">Cognitive Edge Program</div>
+                <div class="package-tagline">Mental clarity, focus, and neuroplasticity — provider-prescribed.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$497<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">starting at — personalized to your needs</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed cognitive peptide therapy (e.g., Semax, Selank, NAD+ — as clinically determined)</li>
+                    <li>Educational overview of cognitive support compounds</li>
+                    <li>Monthly coaching check-ins</li>
+                    <li>Brain performance &amp; sleep optimization coaching</li>
+                    <li>Lifestyle &amp; stress management guidance</li>
+                    <li>Supplement strategy support</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+            <!-- Recovery Stack -->
+            <div class="package-card">
+                <div class="package-icon">⚕️</div>
+                <div class="package-name">Recovery &amp; Repair Program</div>
+                <div class="package-tagline">Heal faster. Train harder. Stay in the game.</div>
+                <div class="provider-rx-badge">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$497<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">starting at — personalized to your needs</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed recovery peptide therapy (e.g., BPC-157, TB-500 — as clinically determined)</li>
+                    <li>Educational overview of tissue repair &amp; recovery compounds</li>
+                    <li>Monthly coaching check-in</li>
+                    <li>Recovery nutrition blueprint</li>
+                    <li>Movement &amp; training guidance</li>
+                    <li>Progress tracking &amp; accountability</li>
+                </ul>
+                <a href="/contact" class="btn btn-primary">Get Started →</a>
+            </div>
+
+            <!-- Longevity Protocol -->
+            <div class="package-card featured">
+                <div class="package-badge">⭐ Most Popular</div>
+                <div class="package-icon">🔬</div>
+                <div class="package-name">Longevity Protocol</div>
+                <div class="package-tagline">Fight biological aging at the cellular level.</div>
+                <div class="provider-rx-badge" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08);color:var(--gold-bright);">🩺 Provider-Prescribed Therapy Included</div>
+                <div class="package-price">$797<span style="font-size:1rem;color:var(--text-muted);">/mo</span></div>
+                <div class="package-commitment">3-month minimum · billed monthly</div>
+                <div class="package-period">starting at — personalized to your needs</div>
+                <ul class="package-includes">
+                    <li>Provider-prescribed longevity peptide therapy (e.g., Epithalon, MOTS-C, NAD+ — as clinically determined)</li>
+                    <li>Immunity support compounds (e.g., Thymosin Alpha-1, LL-37 — as prescribed)</li>
+                    <li>Baseline longevity biomarker panel</li>
+                    <li>Bi-monthly coaching sessions</li>
+                    <li>Anti-aging lifestyle &amp; nutrition protocol</li>
+                    <li>Quarterly labs &amp; provider review</li>
+                </ul>
+                <a href="/contact" class="btn btn-gold">Get Started →</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section>
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Why Vantage</div>
+            <h2 class="section-title">Transformation Is Our Expertise</h2>
+            <p class="section-subtitle">Coach-guided, provider-prescribed, and built around your outcomes — not a one-size-fits-all template.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">🩺</div>
+                <h3>Provider-Prescribed Protocols</h3>
+                <p>Every therapeutic protocol is prescribed by a licensed IHN provider. Coaches educate and support — providers prescribe.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📊</div>
+                <h3>Labs-First Approach</h3>
+                <p>Comprehensive baseline panels before any protocol starts. We optimize your numbers, not our revenue.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎯</div>
+                <h3>Dedicated Coaching</h3>
+                <p>Your coach tracks progress, supports adherence, guides nutrition, and is with you throughout the entire journey.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🏭</div>
+                <h3>Pharmaceutical-Grade Only</h3>
+                <p>All compounds sourced from licensed US compounding pharmacies through IHN-affiliated providers. No gray market.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📦</div>
+                <h3>Doorstep Delivery</h3>
+                <p>Medications shipped discreetly to your door. No pharmacy lines, no awkward conversations.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📈</div>
+                <h3>Results You Can Measure</h3>
+                <p>Follow-up labs and progress reviews every step of the way. Watch your biomarkers and body composition change in real time.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Outcomes</div>
+            <h2 class="section-title">Real People. Real Transformations.</h2>
+            <p class="section-subtitle">What happens when coaching, accountability, and provider-prescribed care come together.</p>
+        </div>
+        <div class="testimonials-grid">
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "After 3 months I lost 18 lbs, gained noticeable muscle, and my energy completely turned around.
+                    My coach kept me accountable every week. I finally feel like myself again."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MR</div>
+                    <div>
+                        <div class="testimonial-name">Marcus R.</div>
+                        <div class="testimonial-meta">45 · Tampa, FL · 12-Week Metabolic Reset</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "I was skeptical at first — I've tried everything. But 60 days in and I'm down 24 lbs.
+                    My energy is incredible. I finally feel like myself again. The coaching made all the difference."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#e879f9,#a855f7);">JL</div>
+                    <div>
+                        <div class="testimonial-name">Jessica L.</div>
+                        <div class="testimonial-meta">38 · Sarasota, FL · Weight Loss Accelerator</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "The Cognitive Edge program is no joke. I'm a software engineer and my productivity
+                    has genuinely doubled. Focus is sharp, I'm sleeping better, and anxiety is just… gone."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">DK</div>
+                    <div>
+                        <div class="testimonial-name">Derek K.</div>
+                        <div class="testimonial-meta">32 · Austin, TX · Cognitive Edge</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "I was dealing with chronic knee pain for 2 years. After 6 weeks on my recovery protocol,
+                    I'm back to training 5 days a week. My body responded faster than I ever expected."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">TM</div>
+                    <div>
+                        <div class="testimonial-name">Tara M.</div>
+                        <div class="testimonial-meta">41 · Nashville, TN · Recovery &amp; Repair</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "Six months in, my body composition is completely different — less fat, more muscle, deeper sleep.
+                    I look and feel years younger. The 90-Day program was worth every penny."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">BH</div>
+                    <div>
+                        <div class="testimonial-name">Brandon H.</div>
+                        <div class="testimonial-meta">52 · Scottsdale, AZ · 90-Day Body Optimization</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "The Women's 50+ protocol changed everything. More energy, better sleep, I feel strong.
+                    People keep asking what I'm doing differently. I've just optimized — the right way."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f472b6,#e879f9);">SR</div>
+                    <div>
+                        <div class="testimonial-name">Sarah R.</div>
+                        <div class="testimonial-meta">54 · Miami, FL · Women's 50+ Optimization</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background: linear-gradient(135deg, #0a0a1a, #0f172a, #0a0a1a); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="section" style="text-align:center; padding: 5rem 2rem;">
+        <div class="section-label">Ready?</div>
+        <h2 class="section-title" style="margin-bottom:1rem;">Your Transformation Starts Here.</h2>
+        <p class="section-subtitle" style="margin-bottom:2.5rem;">
+            Free consultation. No commitment. Just a clear picture of what's possible for you.
+        </p>
+        <a href="/contact" class="btn btn-primary" style="width:auto;display:inline-flex;font-size:1.05rem;padding:1rem 2.5rem;">
+            Book Free Consultation →
+        </a>
+        <p style="color:var(--text-dim);font-size:0.8rem;margin-top:1rem;">No spam. No pressure. Just answers.</p>
+        <p style="color:var(--text-dim);font-size:0.72rem;margin-top:0.75rem;max-width:560px;margin-left:auto;margin-right:auto;">
+            Educational information only. Individual care decisions are determined by a qualified healthcare provider. This is not medical advice.
+        </p>
+    </div>
+</section>
+
+{% endblock %}
