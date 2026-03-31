@@ -186,32 +186,22 @@
         /* ── PACKAGE CARDS ── */
         @media (max-width: 768px) {
             .packages-grid {
-                display: flex !important;
-                flex-direction: row !important;
-                overflow-x: auto !important;
-                scroll-snap-type: x mandatory !important;
-                -webkit-overflow-scrolling: touch !important;
-                gap: 16px !important;
-                padding-bottom: 16px !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10px !important;
             }
-            .packages-grid::-webkit-scrollbar { display: none; }
             .package-card {
-                min-width: 85vw !important;
-                scroll-snap-align: start !important;
-                flex-shrink: 0 !important;
+                padding: 14px 10px !important;
             }
-            .packages-swipe-hint {
-                display: block !important;
-            }
+            .package-icon { font-size: 1.4rem !important; }
+            .package-name { font-size: 0.85rem !important; }
+            .package-tagline { font-size: 0.75rem !important; }
+            .package-price { font-size: 1.3rem !important; }
+            .package-commitment { font-size: 0.65rem !important; }
+            .package-includes { display: none !important; }
+            .package-period { font-size: 0.7rem !important; }
+            .provider-rx-badge { font-size: 0.65rem !important; padding: 4px 6px !important; }
         }
-        .packages-swipe-hint {
-            display: none;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-        }
+        .packages-swipe-hint { display: none; }
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
