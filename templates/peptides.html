@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Peptide Catalog — VANTAGE{% endblock %}
+{% block content %}
+
+<section style="padding: 80px 0 40px; background: linear-gradient(135deg, #0a0a0a 0%, #0d1f3c 100%);">
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
+    <div style="display:inline-block;background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:50px;padding:8px 20px;font-size:0.8rem;letter-spacing:2px;color:var(--electric-blue);text-transform:uppercase;margin-bottom:20px;">Provider-Prescribed Only</div>
+    <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:16px;">Peptide <span style="background:linear-gradient(135deg,var(--electric-blue),var(--gold-bright));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Catalog</span></h1>
+    <p style="font-size:1.1rem;color:var(--text-muted);max-width:600px;margin:0 auto 20px;">All therapies below are available through a licensed provider within our network. Pricing is per vial. A consultation is required before any therapy is prescribed.</p>
+    <div style="background:rgba(255,193,7,0.1);border:1px solid rgba(255,193,7,0.3);border-radius:12px;padding:14px 20px;max-width:700px;margin:0 auto;font-size:0.85rem;color:#ffc107;">
+      ⚕️ <strong>Educational purposes only.</strong> These are not available for purchase without provider approval. Individual care decisions are made by a qualified healthcare provider. This is not medical advice.
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0;background:#0f0f0f;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+
+    <!-- Category: Growth Hormone Peptides -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Growth Hormone Peptides</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+
+      {% set gh_peptides = [
+        ("Sermorelin", "3mg vial", "$175", "Stimulates natural GH release. Supports fat loss, muscle tone, and sleep quality."),
+        ("Tesamorelin", "2mg vial", "$225", "FDA-recognized GHRH analog. Targets visceral fat and supports metabolic health."),
+        ("Ipamorelin", "2mg vial", "$140", "Clean GH secretagogue with minimal side effects. Often stacked with CJC-1295."),
+        ("CJC-1295", "2mg vial", "$150", "Long-acting GHRH analog. Extends GH pulse duration when combined with Ipamorelin."),
+        ("AOD-9604", "2mg vial", "$130", "Modified fragment of HGH. Targets fat metabolism without affecting blood sugar."),
+      ] %}
+      {% for name, dose, price, desc in gh_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Category: Recovery & Healing -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Recovery & Healing</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+      {% set recovery_peptides = [
+        ("BPC-157", "5mg vial", "$145", "Body Protection Compound. Supports gut healing, tendon repair, and injury recovery."),
+        ("TB-500", "5mg vial", "$165", "Thymosin Beta-4 fragment. Promotes tissue repair, flexibility, and reduced inflammation."),
+        ("GHK-CU", "50mg vial", "$180", "Copper peptide with powerful anti-aging and tissue remodeling properties."),
+        ("Thymosin Alpha-1", "5mg vial", "$220", "Immune system modulator. Enhances defense against viruses and supports recovery."),
+      ] %}
+      {% for name, dose, price, desc in recovery_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Category: Cognitive & Mood -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Cognitive & Mood</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+      {% set cognitive_peptides = [
+        ("Semax", "30mg vial", "$175", "Neuropeptide supporting focus, memory, mood regulation, and BDNF production."),
+        ("Selank", "5mg vial", "$155", "Anxiolytic peptide. Reduces anxiety, improves stress resilience and cognitive clarity."),
+        ("Methylene Blue", "50mg vial", "$120", "Mitochondrial support, cognitive enhancement, and neuroprotection. Potent antioxidant."),
+      ] %}
+      {% for name, dose, price, desc in cognitive_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Category: Sexual Health & Vitality -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Sexual Health & Vitality</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+      {% set sexual_peptides = [
+        ("PT-141", "10mg vial", "$185", "Melanocortin receptor agonist. Supports libido and sexual function in men and women."),
+        ("Kisspeptin", "5mg vial", "$195", "Hormone regulator supporting testosterone, LH, and reproductive health."),
+      ] %}
+      {% for name, dose, price, desc in sexual_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Category: Metabolic & Weight Loss -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Metabolic & Weight Loss</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+      {% set metabolic_peptides = [
+        ("Retatrutide", "5mg vial", "$320", "Triple agonist (GLP-1 + GIP + glucagon). Advanced metabolic optimization therapy."),
+        ("5-Amino-1MQ", "100mg vial", "$195", "NNMT inhibitor supporting fat loss, metabolic rate, and cellular energy production."),
+        ("MOTs-C", "5mg vial", "$260", "Mitochondrial peptide. Improves insulin sensitivity, metabolic function, and energy."),
+      ] %}
+      {% for name, dose, price, desc in metabolic_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Category: Antioxidants & Longevity -->
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Antioxidants & Longevity</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
+      {% set longevity_peptides = [
+        ("NAD+", "500mg vial", "$175", "Essential coenzyme for DNA repair, mitochondrial function, and cellular energy."),
+        ("Glutathione", "200mg vial", "$145", "Master antioxidant. Detoxification, immune support, skin brightening, and anti-aging."),
+      ] %}
+      {% for name, dose, price, desc in longevity_peptides %}
+      <div class="peptide-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+          <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);">{{ name }}</h3>
+          <span style="background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:20px;padding:3px 10px;font-size:0.75rem;color:var(--electric-blue);">{{ dose }}</span>
+        </div>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">{{ desc }}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--gold-bright);">{{ price }}<span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;">/vial</span></span>
+          <a href="/contact" style="background:var(--electric-blue);color:#000;padding:8px 16px;border-radius:6px;font-size:0.8rem;font-weight:700;text-decoration:none;">Inquire</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- CTA -->
+    <div style="background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(255,193,7,0.05));border:1px solid rgba(0,212,255,0.2);border-radius:20px;padding:48px;text-align:center;">
+      <h2 style="font-size:2rem;font-weight:800;margin-bottom:12px;">Ready to Get Started?</h2>
+      <p style="color:var(--text-muted);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;">Book a free consultation. Our provider will review your goals and labs, then design a protocol tailored to you.</p>
+      <a href="/contact" style="background:linear-gradient(135deg,var(--electric-blue),#0099cc);color:#000;padding:16px 40px;border-radius:50px;font-weight:800;font-size:1rem;text-decoration:none;display:inline-block;">Book Free Consultation</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.peptide-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.peptide-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--electric-blue);
+  box-shadow: 0 8px 30px rgba(0,212,255,0.15);
+}
+</style>
+{% endblock %}
