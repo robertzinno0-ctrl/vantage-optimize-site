@@ -7,6 +7,7 @@
     <div style="display:inline-block;background:rgba(0,212,255,0.1);border:1px solid var(--electric-blue);border-radius:50px;padding:8px 20px;font-size:0.8rem;letter-spacing:2px;color:var(--electric-blue);text-transform:uppercase;margin-bottom:20px;">Provider-Prescribed Only</div>
     <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;margin-bottom:16px;text-align:center;">Our <span style="color:var(--electric-blue);">Peptides</span></h1>
     <p style="font-size:1.1rem;color:var(--text-muted);max-width:700px;margin:0 auto 20px;">Pricing is per vial and includes pharmaceutical-grade compounds sourced exclusively from licensed US compounding pharmacies. All pricing includes the provider fee and shipping — no hidden costs. A consultation is required before any therapy is prescribed.</p>
+    <p style="font-size:0.95rem;color:var(--text-muted);max-width:700px;margin:0 auto 20px;"><strong style="color:var(--electric-blue);">Prices shown are all-inclusive</strong> — pharmacy compound, provider fee, and shipping. Nothing billed separately.</p>
     <div style="background:rgba(255,193,7,0.1);border:1px solid rgba(255,193,7,0.3);border-radius:12px;padding:14px 20px;max-width:700px;margin:0 auto;font-size:0.85rem;color:#ffc107;">
       ⚕️ <strong>Educational purposes only.</strong> These are not available for purchase without provider approval. Individual care decisions are made by a qualified healthcare provider. This is not medical advice.
     </div>
@@ -21,11 +22,11 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
 
       {% set gh_peptides = [
-        ("Sermorelin", "3mg vial", "$175", "Stimulates natural GH release. Supports fat loss, muscle tone, and sleep quality."),
-        ("Tesamorelin", "2mg vial", "$225", "FDA-recognized GHRH analog. Targets visceral fat and supports metabolic health."),
-        ("Ipamorelin", "2mg vial", "$140", "Clean GH secretagogue with minimal side effects. Often stacked with CJC-1295."),
-        ("CJC-1295", "2mg vial", "$150", "Long-acting GHRH analog. Extends GH pulse duration when combined with Ipamorelin."),
-        ("AOD-9604", "2mg vial", "$130", "Modified fragment of HGH. Targets fat metabolism without affecting blood sugar."),
+        ("Sermorelin", "3mg vial", "$304", "Stimulates natural GH release. Supports fat loss, muscle tone, and sleep quality."),
+        ("Tesamorelin", "2mg vial", "$318", "FDA-recognized GHRH analog. Targets visceral fat and supports metabolic health."),
+        ("Ipamorelin", "2mg vial", "$388", "Clean GH secretagogue with minimal side effects. Often stacked with CJC-1295."),
+        ("CJC-1295", "2mg vial", "$388", "Long-acting GHRH analog. Extends GH pulse duration when combined with Ipamorelin."),
+        ("AOD-9604", "2mg vial", "$318", "Modified fragment of HGH. Targets fat metabolism without affecting blood sugar."),
       ] %}
       {% for name, dose, price, desc in gh_peptides %}
       <div class="peptide-card">
@@ -46,10 +47,10 @@
     <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Recovery & Healing</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
       {% set recovery_peptides = [
-        ("BPC-157", "5mg vial", "$145", "Body Protection Compound. Supports gut healing, tendon repair, and injury recovery."),
-        ("TB-500", "5mg vial", "$165", "Thymosin Beta-4 fragment. Promotes tissue repair, flexibility, and reduced inflammation."),
-        ("GHK-CU", "50mg vial", "$180", "Copper peptide with powerful anti-aging and tissue remodeling properties."),
-        ("Thymosin Alpha-1", "5mg vial", "$220", "Immune system modulator. Enhances defense against viruses and supports recovery."),
+        ("BPC-157", "5mg vial", "$318", "Body Protection Compound. Supports gut healing, tendon repair, and injury recovery."),
+        ("TB-500", "5mg vial", "$318", "Thymosin Beta-4 fragment. Promotes tissue repair, flexibility, and reduced inflammation."),
+        ("GHK-Cu", "50mg vial", "$318", "Copper peptide with powerful anti-aging and tissue remodeling properties."),
+        ("Thymosin Alpha-1", "5mg vial", "$318", "Immune system modulator. Enhances defense against viruses and supports recovery."),
       ] %}
       {% for name, dose, price, desc in recovery_peptides %}
       <div class="peptide-card">
@@ -70,8 +71,8 @@
     <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Cognitive & Mood</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
       {% set cognitive_peptides = [
-        ("Semax", "30mg vial", "$175", "Neuropeptide supporting focus, memory, mood regulation, and BDNF production."),
-        ("Selank", "5mg vial", "$155", "Anxiolytic peptide. Reduces anxiety, improves stress resilience and cognitive clarity."),
+        ("Semax", "30mg vial", "$388", "Neuropeptide supporting focus, memory, mood regulation, and BDNF production."),
+        ("Selank", "5mg vial", "$388", "Anxiolytic peptide. Reduces anxiety, improves stress resilience and cognitive clarity."),
         ("Methylene Blue", "50mg vial", "$120", "Mitochondrial support, cognitive enhancement, and neuroprotection. Potent antioxidant."),
       ] %}
       {% for name, dose, price, desc in cognitive_peptides %}
@@ -93,8 +94,8 @@
     <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Sexual Health & Vitality</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
       {% set sexual_peptides = [
-        ("PT-141", "10mg vial", "$185", "Melanocortin receptor agonist. Supports libido and sexual function in men and women."),
-        ("Kisspeptin", "5mg vial", "$195", "Hormone regulator supporting testosterone, LH, and reproductive health."),
+        ("PT-141", "10mg vial", "$318", "Melanocortin receptor agonist. Supports libido and sexual function in men and women."),
+        ("Kisspeptin", "5mg vial", "$318", "Hormone regulator supporting testosterone, LH, and reproductive health."),
       ] %}
       {% for name, dose, price, desc in sexual_peptides %}
       <div class="peptide-card">
@@ -115,9 +116,11 @@
     <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Metabolic & Weight Loss</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
       {% set metabolic_peptides = [
-        ("Retatrutide", "5mg vial", "$320", "Triple agonist (GLP-1 + GIP + glucagon). Advanced metabolic optimization therapy."),
+        ("Semaglutide", "6mg vial", "$304", "GLP-1 agonist. Supports appetite control, weight loss, and metabolic health."),
+        ("Tirzepatide", "10mg vial", "$388", "Dual GLP-1/GIP agonist. Advanced metabolic and weight loss therapy."),
+        ("Retatrutide", "4mg vial", "$574", "Triple agonist (GLP-1 + GIP + glucagon). Advanced metabolic optimization therapy."),
         ("5-Amino-1MQ", "100mg vial", "$195", "NNMT inhibitor supporting fat loss, metabolic rate, and cellular energy production."),
-        ("MOTs-C", "5mg vial", "$260", "Mitochondrial peptide. Improves insulin sensitivity, metabolic function, and energy."),
+        ("MOTs-C", "5mg vial", "$318", "Mitochondrial peptide. Improves insulin sensitivity, metabolic function, and energy."),
       ] %}
       {% for name, dose, price, desc in metabolic_peptides %}
       <div class="peptide-card">
@@ -138,8 +141,8 @@
     <h2 style="font-size:1.3rem;font-weight:700;color:var(--electric-blue);text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid rgba(0,212,255,0.2);padding-bottom:12px;margin-bottom:32px;">Antioxidants & Longevity</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-bottom:60px;">
       {% set longevity_peptides = [
-        ("NAD+", "500mg vial", "$175", "Essential coenzyme for DNA repair, mitochondrial function, and cellular energy."),
-        ("Glutathione", "200mg vial", "$145", "Master antioxidant. Detoxification, immune support, skin brightening, and anti-aging."),
+        ("NAD+", "500mg vial", "$318", "Essential coenzyme for DNA repair, mitochondrial function, and cellular energy."),
+        ("Glutathione", "200mg vial", "$192", "Master antioxidant. Detoxification, immune support, skin brightening, and anti-aging."),
       ] %}
       {% for name, dose, price, desc in longevity_peptides %}
       <div class="peptide-card">
