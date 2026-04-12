@@ -59,7 +59,9 @@ Message:
             mail.send(msg)
             flash('Message received! We\'ll be in touch within 24 hours.', 'success')
         except Exception as e:
-            print(f'Email error: {e}')
+            import traceback
+            print(f'EMAIL ERROR: {e}')
+            print(traceback.format_exc())
             flash('Message received! We\'ll be in touch within 24 hours.', 'success')
         return redirect(url_for('contact'))
     return render_template('contact.html')
